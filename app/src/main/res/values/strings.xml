@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wi-Fi Security Analyser</string>
+    <string name="network_list_title">Available Wi-Fi Networks</string>
+    <string name="run_test">Run Security Test</string>
+    <string name="risk_high">High Risk</string>
+    <string name="risk_medium">Medium Risk</string>
+    <string name="risk_low">Low Risk</string>
+    <string name="risk_unknown">Unknown Risk</string>
+</resources>
