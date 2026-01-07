@@ -18,6 +18,13 @@ public class WifiNetwork {
         this.ssidHash = ssidHash;
     }
 
+    public String getSsid() { return ssid; }
+    public String getBssid() { return bssid; }
+    public int getSignalStrength() { return signalStrength; }
+    public String getSecurityType() { return securityType; }
+    public String getRiskLevel() { return riskLevel; }
+    public String getSsidHash() { return ssidHash; }
+
     @Override
     public String toString() {
         return "SSID: " + ssid +

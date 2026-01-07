@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="70dp">
 
         <!-- SSID -->
         <TextView
@@ -53,7 +53,7 @@
             android:id="@+id/testButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/run_test"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="@string/run_test" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

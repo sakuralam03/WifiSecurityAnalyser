@@ -10,7 +10,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wifisecurityanalyser.analyzer.RiskAnalyzer;
 import com.example.wifisecurityanalyser.crypto.CryptoUtils;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_LOCATION = 100;
     private WifiManager wifiManager;
+    private WifiAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+
+        recyclerView = findViewById(R.id.wifiRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Empty adapter initially
+        adapter = new WifiAdapter(new ArrayList<>(), network -> {
+            Log.d("Test", "Running test on: " + network.getSsid());
+            // TODO: Launch NetworkTestActivity or show dialog with details
+        });
+        recyclerView.setAdapter(adapter);
 
         if (PermissionUtils.hasLocationPermission(this)) {
             scanWifiNetworks();
@@ -42,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void scanWifiNetworks() {
+        wifiManager.startScan(); // ensure fresh scan
         List<ScanResult> results = wifiManager.getScanResults();
         List<WifiNetwork> networks = new ArrayList<>();
 
@@ -58,9 +72,14 @@ public class MainActivity extends AppCompatActivity {
                     hash
             );
             networks.add(network);
-
-            Log.d("WiFi", network.toString());
         }
+
+        // Update adapter with new data
+        adapter = new WifiAdapter(networks, network -> {
+            Log.d("Test", "Running test on: " + network.getSsid());
+        });
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

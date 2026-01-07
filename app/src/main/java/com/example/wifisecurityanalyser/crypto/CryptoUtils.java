@@ -5,7 +5,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class CryptoUtils {
-
     public static String hashSSID(String ssid) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
