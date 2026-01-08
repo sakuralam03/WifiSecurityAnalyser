@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -12,43 +11,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="70dp">
+        android:padding="50dp">
 
         <!-- SSID -->
         <TextView
             android:id="@+id/ssidText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SSID"
-            android:textStyle="bold"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <!-- Signal strength -->
         <TextView
             android:id="@+id/signalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signal: -70 dBm"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <!-- Security type -->
         <TextView
             android:id="@+id/securityText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Security: WPA2"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
-        <!-- Risk level (color-coded) -->
+        <!-- Risk level -->
         <TextView
             android:id="@+id/riskText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Risk: Medium"
-            android:textSize="14sp"
-            android:textColor="@android:color/holo_orange_dark"/>
+            android:textSize="14sp" />
 
-        <!-- Button to run deeper test -->
+        <!-- Button -->
         <Button
             android:id="@+id/testButton"
             android:layout_width="wrap_content"

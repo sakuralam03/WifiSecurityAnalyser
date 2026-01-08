@@ -1,4 +1,7 @@
+
+
 package com.example.wifisecurityanalyser;
+
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,21 +13,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wifisecurityanalyser.R;
 import com.example.wifisecurityanalyser.models.WifiNetwork;
 
 import java.util.List;
 
 public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.WifiViewHolder> {
 
-    private List<WifiNetwork> wifiList;
-    private OnTestClickListener listener;
+    private final List<WifiNetwork> networks;
+    private final OnTestClickListener listener;
 
     public interface OnTestClickListener {
         void onTestClick(WifiNetwork network);
     }
 
-    public WifiAdapter(List<WifiNetwork> wifiList, OnTestClickListener listener) {
-        this.wifiList = wifiList;
+    public WifiAdapter(List<WifiNetwork> networks, OnTestClickListener listener) {
+        this.networks = networks;
         this.listener = listener;
     }
 
@@ -38,19 +42,20 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.WifiViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull WifiViewHolder holder, int position) {
-        WifiNetwork network = wifiList.get(position);
+        WifiNetwork network = networks.get(position);
 
         holder.ssidText.setText(network.getSsid());
         holder.signalText.setText("Signal: " + network.getSignalStrength() + " dBm");
         holder.securityText.setText("Security: " + network.getSecurityType());
         holder.riskText.setText("Risk: " + network.getRiskLevel());
 
+        // 🎨 Color-code risk
         switch (network.getRiskLevel()) {
             case "High":
                 holder.riskText.setTextColor(Color.RED);
                 break;
             case "Medium":
-                holder.riskText.setTextColor(Color.parseColor("#FFA500"));
+                holder.riskText.setTextColor(Color.parseColor("#FFA500")); // orange
                 break;
             case "Low":
                 holder.riskText.setTextColor(Color.GREEN);
@@ -59,19 +64,27 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.WifiViewHolder
                 holder.riskText.setTextColor(Color.GRAY);
         }
 
+        // Button click
         holder.testButton.setOnClickListener(v -> listener.onTestClick(network));
     }
 
     @Override
     public int getItemCount() {
-        return wifiList.size();
+        return networks.size();
+    }
+
+    // 🔄 Update dataset
+    public void updateData(List<WifiNetwork> newNetworks) {
+        networks.clear();
+        networks.addAll(newNetworks);
+        notifyDataSetChanged();
     }
 
     static class WifiViewHolder extends RecyclerView.ViewHolder {
         TextView ssidText, signalText, securityText, riskText;
         Button testButton;
 
-        WifiViewHolder(View itemView) {
+        WifiViewHolder(@NonNull View itemView) {
             super(itemView);
             ssidText = itemView.findViewById(R.id.ssidText);
             signalText = itemView.findViewById(R.id.signalText);
