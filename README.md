@@ -65,12 +65,8 @@ WifiSecurityAnalyser/
    ```bash
    git clone https://github.com/yourusername/WifiSecurityAnalyser.git
 Last Saturday
-You said
-Wi-Fi Security Analyzer	Medium	High	Android Wi-Fi APIs, crypto libs     how do i make this app on androis studio
-Copilot said
-Got it — you want to build a Wi-Fi Security Analyzer app in Android Studio that uses Android Wi-Fi APIs and crypto libraries. Let’s break this down step by step so you can scaffold it properly:
 
-🛠️ Step 1: Define the Scope
+###🛠️ Step 1: Define the Scope
 Your app should:
 
 Scan Wi-Fi networks (SSID, BSSID, signal strength, security type).
@@ -81,7 +77,7 @@ Perform cryptographic checks (e.g., hash validation, weak key detection).
 
 Report risk levels (Medium, High, etc.).
 
-📚 Step 2: Set Up Android Studio Project
+### 📚 Step 2: Set Up Android Studio Project
 Open Android Studio → New Project → Empty Activity.
 
 Configure:
@@ -90,23 +86,19 @@ Minimum SDK: Android 8.0 (API 26) or higher (Wi-Fi APIs are stable here).
 
 Add permissions in AndroidManifest.xml:
 
-xml
 
-
-Copy
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.INTERNET"/>
 ⚠️ Since Android 10+, Wi-Fi scanning requires location permission.
 
-📡 Step 3: Use Android Wi-Fi APIs
+### 📡 Step 3: Use Android Wi-Fi APIs
 Access Wi-Fi networks via WifiManager:
 
-java
 
 
-Copy
+
 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 List<ScanResult> results = wifiManager.getScanResults();
 for (ScanResult result : results) {
@@ -119,15 +111,11 @@ Use Java Cryptography Architecture (JCA) or BouncyCastle for deeper checks.
 
 Example: Hashing SSID for fingerprinting.
 
-java
-
-
-Copy
 MessageDigest digest = MessageDigest.getInstance("SHA-256");
 byte[] hash = digest.digest(result.SSID.getBytes(StandardCharsets.UTF_8));
 You can also test weak password dictionaries (educational use only).
 
-📊 Step 5: Risk Analysis Logic
+### 📊 Step 5: Risk Analysis Logic
 Create a scoring system:
 
 WEP → High risk
@@ -147,7 +135,7 @@ String risk;
 if (security.contains("WEP")) risk = "High";
 else if (security.contains("WPA2") && security.contains("TKIP")) risk = "Medium";
 else risk = "Low";
-🎨 Step 6: UI Design
+### 🎨 Step 6: UI Design
 Use RecyclerView to list networks.
 
 Show:
